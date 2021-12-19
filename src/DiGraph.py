@@ -9,6 +9,12 @@ class DiGraph(GraphInterface):
         self.nodes = {}
         self.mc = 0
 
+    def get_node(self , node_id):
+        """Returns the node of this id if the node is in the graph"""
+        if node_id in self.nodes:
+            return self.nodes.get(node_id)
+        return None
+
     def v_size(self) -> int:
         """Returns the number of vertices in this graph"""
         return self.nodeSize
