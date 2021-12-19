@@ -4,6 +4,7 @@ from typing import List
 from GraphAlgoInterface import GraphAlgoInterface
 from DiGraph import DiGraph
 from src.GraphInterface import GraphInterface
+from src.MyNode import MyNode
 
 
 class GraphAlgo(GraphAlgoInterface):
@@ -22,7 +23,33 @@ class GraphAlgo(GraphAlgoInterface):
         @param file_name: The path to the json file
         @returns True if the loading was successful, False o.w.
         """
-        raise NotImplementedError
+        try:
+            self.graph = DiGraph()
+            f = open(file_name, 'r')
+            curr_graph = json.load(f)
+            edges_dict = curr_graph.get('Edges')
+            nodes_dict = curr_graph.get('Nodes')
+
+            for node in nodes_dict:
+                if node.get('pos') is not None:
+                    pos_node = node['pos']
+                    pos_list = pos_node.split(',')
+                    id_node = node.get('id')
+                    self.graph.add_node(node_id=id_node, pos=(float(pos_list[0]), float(pos_list[1]),
+                                                                        float(pos_list[2])))
+                else:
+                    id_node = node.get('id')
+                    self.graph.add_node(node_id=id_node)
+
+            for edge in edges_dict:
+                weight = edge.get('w')
+                src = edge.get('src')
+                dest = edge.get('dest')
+                self.graph.add_edge(src, dest, weight)
+            f.close()
+        except FileExistsError:
+            return False
+        return True
 
     def save_to_json(self, file_name: str) -> bool:
         """
@@ -47,9 +74,9 @@ class GraphAlgo(GraphAlgoInterface):
                 weight = self.graph.get_node(src).neighbors_out[dest]
                 edges.append({"src": src, "dest": dest, "w": weight})
 
-        curr_graph = {"Nodes":nodes, "Edges":edges}
-        with open (file_name, 'w') as json_file:
-            json.dump(curr_graph , json_file)
+        curr_graph = {"Nodes": nodes, "Edges": edges}
+        with open(file_name, 'w') as json_file:
+            json.dump(curr_graph, json_file)
         return True
 
     def shortest_path(self, id1: int, id2: int) -> (float, list):
