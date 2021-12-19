@@ -95,10 +95,19 @@ class DiGraph(GraphInterface):
         @return: True if the node was removed successfully, False o.w.
         Note: if the node id does not exists the function will do nothing
         """
-        if node_id not in self.nodes:
+        if node_id not in self.nodes.keys():
             return False
-        removed_node = self.nodes[node_id]
-        return False
+        nodes_keys = ()
+        for node in self.nodes.get(node_id).neighbors_out.keys():
+            nodes_keys += (node,)
+        [self.remove_edge(node_id , node) for node in nodes_keys]
+        for node in self.nodes.get(node_id).neighbors_in.keys():
+            nodes_keys += (node,)
+        [self.remove_edge(node_id, node) for node in nodes_keys]
+        del self.nodes[node_id]
+        self.mc += 1
+        self.nodeSize -= 1
+        return True
 
 
     def remove_edge(self, node_id1: int, node_id2: int) -> bool:
