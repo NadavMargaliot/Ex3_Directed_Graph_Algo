@@ -1,11 +1,13 @@
 import heapq
 import json
+import random
 from typing import List
 from numpy import inf
 
 from GraphAlgoInterface import GraphAlgoInterface
 from DiGraph import DiGraph
 from src.GraphInterface import GraphInterface
+import matplotlib.pyplot as plt
 from src.MyNode import MyNode
 
 
@@ -81,6 +83,47 @@ class GraphAlgo(GraphAlgoInterface):
             json.dump(curr_graph, json_file)
         return True
 
+    def shortest_path(self, id1: int, id2: int) -> (float, list):
+        """
+        Returns the shortest path from node id1 to node id2 using Dijkstra's Algorithm
+        @param id1: The start node id
+        @param id2: The end node id
+        @return: The distance of the path, a list of the nodes ids that the path goes through"""
+        """initialize all weights of nodes to infinity"""
+        dist_weight = {node: inf for node in self.graph.nodes.keys()}
+        """keeping track on the shortest path to the nodes"""
+        previous_nodes = {id1: -1}
+        dist_weight[id1] = 0
+        queue = []
+        heapq.heappush(queue, (0, id1))
+        while queue:
+            current_node = heapq.heappop(queue)[1]
+            if dist_weight[current_node] == inf:
+                break
+            """iterating on the neighbors of the current node as pairs (neighbor = id , weight = weight)"""
+            for neighbour, weight in self.graph.nodes.get(current_node).neighbors_out.items():
+                alternative_route = dist_weight[current_node] + weight
+                if alternative_route < dist_weight[neighbour]:
+                    dist_weight[neighbour] = alternative_route
+                    previous_nodes[neighbour] = current_node
+                    """adding to the queue the distance to the neighbor and the neighbor as a pair
+                    the queue is a priority queue so when it will pop an node, it will pop the node
+                     with the smallest dist_weight"""
+                    heapq.heappush(queue, (dist_weight[neighbour], neighbour))
+                if current_node == id2:
+                    break
+        path = []
+        current_node = id2
+        if dist_weight[id2] == inf:
+            """there isn't a path from id1 to id2"""
+            return inf, []
+        while current_node != -1:
+            path.insert(0, current_node)
+            """shortest path"""
+            current_node = previous_nodes[current_node]
+
+        return dist_weight[id2], path
+
 
 
     def shortest_path(self, id1: int, id2: int) -> (float, list):
@@ -139,6 +182,24 @@ class GraphAlgo(GraphAlgoInterface):
         Finds the node that has the shortest distance to it's farthest node.
         :return: The nodes id, min-maximum distance
         """
+        if self.graph.nodeSize == 0:
+            return None,None
+        result_min_distance = inf
+        result_id = 0
+        curr_max = 0
+        for node1 in self.get_graph().get_all_v().values():
+            for node2 in self.get_graph().get_all_v().values():
+                print()
+                distance = self.shortest_path(node1.id, node2.id)[0]
+                if distance > curr_max:
+                    curr_max = distance
+            if curr_max < result_min_distance:
+                result_min_distance = curr_max
+                result_id = node1.id
+            curr_max = 0
+        result = (result_id, result_min_distance)
+        return result
+
 
     def plot_graph(self) -> None:
         """
@@ -147,3 +208,19 @@ class GraphAlgo(GraphAlgoInterface):
         Otherwise, they will be placed in a random but elegant manner.
         @return: None
         """
+        for node in self.graph.get_all_v().values():
+            if node.location is None:
+                location1 = (random.uniform(0,50) , random.uniform(0,50),0.0)
+                node.setLocation(location1)
+            x1, y1, z1 = node.location
+            plt.plot(x1, y1, markersize=15, marker='.', color='pink')
+            plt.text(x1, y1, str(node.id), color='blue', fontsize=12)
+            for dest_id, w in self.graph.all_out_edges_of_node(node.id).items():
+                dest = self.graph.get_node(dest_id)
+                if dest.location is None:
+                    location2 = (random.uniform(0, 50), random.uniform(0, 50), 0.0)
+                    dest.setLocation(location2)
+                x2, y2, z2 = dest.location
+                plt.annotate("", xy=(x1, y1), xytext=(x2, y2), arrowprops=dict(arrowstyle="<-"))
+        plt.show()
+
