@@ -123,25 +123,7 @@ class GraphAlgo(GraphAlgoInterface):
             current_node = previous_nodes[current_node]
 
         return dist_weight[id2], path
-        # if self.graph.nodes.get(id1) is None:
-        #     raise Exception('Node {} is not exist in the graph'.format(id1))
-        # if self.graph.nodes.get(id2) is None:
-        #     raise Exception('Node {} is not exist in the graph'.format(id2))
-        # if id1 == id2:
-        #     return 0 , [id1]
-        #
-        # heapq.heappush(self.graph.nodes.get(id1))
-        # while heapq:
-        #     tmp_node = heapq.heappop()
-        #     if tmp_node.info != "visited":
-        #         tmp_node.info = "visited"
-        #     for i in tmp_node.neighbors_out.keys:
-        #         if i.info != "visited":
-        #             if tmp_node.weight + i.weight < self.graph.nodes.get(i).weight:
-        #                 self.graph.nodes.get(i).setWeight(tmp_node.weight + i.weight)
-        #                 heapq.heappush(self.graph.nodes.get(i))
-        #
-        #
+
 
 
 
