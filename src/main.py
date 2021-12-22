@@ -19,8 +19,8 @@ def check():
     (7, 6.806805834715163)
     ([1,3,4,2],3.5)
     """
-    check0()
-    check1()
+    # check0()
+    # check1()
     check2()
 
 
@@ -54,7 +54,7 @@ def check1():
     :return:
     """
     g_algo = GraphAlgo()  # init an empty graph - for the GraphAlgo
-    file = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/T0.json_saved"
+    file = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/T0.json"
     g_algo.load_from_json(file)  # init a GraphAlgo from a json file
     print(g_algo.shortest_path(0, 3))
     print(g_algo.shortest_path(3, 1))
@@ -68,7 +68,7 @@ def check2():
       :return:
       """
     g_algo = GraphAlgo()
-    file = '/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A5_edited'
+    file = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A5.json"
     g_algo.load_from_json(file)
     g_algo.get_graph().remove_edge(13, 14)
     g_algo.save_to_json(file + "_edited")
