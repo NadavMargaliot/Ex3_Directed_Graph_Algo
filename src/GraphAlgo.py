@@ -12,8 +12,10 @@ from src.MyNode import MyNode
 
 
 class GraphAlgo(GraphAlgoInterface):
-    def __init__(self, graph: DiGraph):
+    def __init__(self, graph: DiGraph = None):
         self.graph = graph
+
+
 
     def get_graph(self) -> GraphInterface:
         """
@@ -42,8 +44,10 @@ class GraphAlgo(GraphAlgoInterface):
                     self.graph.add_node(node_id=id_node, pos=(float(pos_list[0]), float(pos_list[1]),
                                                                         float(pos_list[2])))
                 else:
-                    id_node = node.get('id')
-                    self.graph.add_node(node_id=id_node)
+                    x = random.uniform(0 , 100)
+                    y = random.uniform(0 , 100)
+                    id_node =int(node.get('id'))
+                    self.graph.add_node(id_node,(x,y,0))
 
             for edge in edges_dict:
                 weight = edge.get('w')
@@ -209,7 +213,7 @@ class GraphAlgo(GraphAlgoInterface):
         """
         for node in self.graph.nodes.values():
             if node.location is None:
-                location1 = (random.uniform(0,50) , random.uniform(0,50),0.0)
+                location1 = (random.uniform(0,100) , random.uniform(0,100),0.0)
                 node.setLocation(location1)
             x1, y1, z1 = node.location
             plt.plot(x1, y1, markersize=15, marker='.', color='orange')
@@ -217,7 +221,7 @@ class GraphAlgo(GraphAlgoInterface):
             for dest_id, w in self.graph.all_out_edges_of_node(node.id).items():
                 dest = self.graph.get_node(dest_id)
                 if dest.location is None:
-                    location2 = (random.uniform(0, 50), random.uniform(0, 50), 0.0)
+                    location2 = (random.uniform(0, 100), random.uniform(0, 100), 0.0)
                     dest.setLocation(location2)
                 x2, y2, z2 = dest.location
                 plt.annotate("", xy=(x1, y1), xytext=(x2, y2), arrowprops=dict(arrowstyle="<|-"))

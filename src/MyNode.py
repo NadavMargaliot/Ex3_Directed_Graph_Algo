@@ -14,13 +14,13 @@ class MyNode:
         self.neighbors_in = {}  # <src_id , weight>
 
 
-        def __str__(self) -> str:
-            """@return a string (str) representation of the NodeData"""
-            return f"{self.id}"
+    def __str__(self) -> str:
+        """@return a string (str) representation of the NodeData"""
+        return f"{self.id}"
 
-        def __repr__(self) -> str:
-            """@return a string (repr) representation of the NodeData"""
-            return f"{self.id}"
+    def __repr__(self) -> str:
+        """@return a string (repr) representation of the NodeData"""
+        return f"{self.id}"
 
 
     def setLocation(self, location: tuple):
