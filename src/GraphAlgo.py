@@ -208,19 +208,19 @@ class GraphAlgo(GraphAlgoInterface):
         Otherwise, they will be placed in a random but elegant manner.
         @return: None
         """
-        for node in self.graph.get_all_v().values():
+        for node in self.graph.nodes.values():
             if node.location is None:
                 location1 = (random.uniform(0,50) , random.uniform(0,50),0.0)
                 node.setLocation(location1)
             x1, y1, z1 = node.location
-            plt.plot(x1, y1, markersize=15, marker='.', color='pink')
-            plt.text(x1, y1, str(node.id), color='blue', fontsize=12)
+            plt.plot(x1, y1, markersize=15, marker='.', color='orange')
+            plt.text(x1, y1, str(node.id), color='blue', fontsize=10)
             for dest_id, w in self.graph.all_out_edges_of_node(node.id).items():
                 dest = self.graph.get_node(dest_id)
                 if dest.location is None:
                     location2 = (random.uniform(0, 50), random.uniform(0, 50), 0.0)
                     dest.setLocation(location2)
                 x2, y2, z2 = dest.location
-                plt.annotate("", xy=(x1, y1), xytext=(x2, y2), arrowprops=dict(arrowstyle="<-"))
+                plt.annotate("", xy=(x1, y1), xytext=(x2, y2), arrowprops=dict(arrowstyle="<|-"))
         plt.show()
 
