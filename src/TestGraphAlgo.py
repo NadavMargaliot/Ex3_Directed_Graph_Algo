@@ -85,8 +85,7 @@ class MyTestCase(unittest.TestCase):
         alg1.load_from_json("/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A5_edited")
         alg4 = GraphAlgo(graph)
         alg4.load_from_json(G4)
-        print(alg4.centerPoint())
-       # self.assertEqual(40 , alg1.centerPoint()[0])
+        self.assertEqual(40 , alg1.centerPoint()[0])
 
 
     def test_plot_graph(self):

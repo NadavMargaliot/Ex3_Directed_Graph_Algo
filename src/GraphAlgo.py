@@ -187,9 +187,8 @@ class GraphAlgo(GraphAlgoInterface):
         result_min_distance = inf
         result_id = 0
         curr_max = 0
-        for node1 in self.get_graph().get_all_v().values():
-            for node2 in self.get_graph().get_all_v().values():
-                print()
+        for node1 in self.graph.nodes.values():
+            for node2 in self.graph.nodes.values():
                 distance = self.shortest_path(node1.id, node2.id)[0]
                 if distance > curr_max:
                     curr_max = distance
