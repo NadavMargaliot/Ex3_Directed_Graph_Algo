@@ -30,7 +30,9 @@ Example of the graph from check0() - random location of 4 nodes:
 ![random](https://user-images.githubusercontent.com/84914845/147069210-1aad4540-1b8e-422d-9b7a-e1b99798a0c4.jpg)
 
 
+
 Graph G3:
+
 ![G3](https://user-images.githubusercontent.com/84914845/147069282-aff75a7b-4cd0-4820-ba4a-0dd1a69d63c9.jpg)
 
 
