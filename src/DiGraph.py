@@ -126,7 +126,7 @@ class DiGraph(GraphInterface):
 
     def __str__(self) -> str:
         """@return a string (str) representation of the DiGraph"""
-        return f"{self.nodes}"
+        return f"Graph: |V|={self.nodeSize}, |E|={self.edgeSize}"
 
     def __repr__(self) -> str:
         """@return a string (repr) representation of the DiGraph"""

@@ -130,49 +130,6 @@ class GraphAlgo(GraphAlgoInterface):
 
 
 
-    def shortest_path(self, id1: int, id2: int) -> (float, list):
-        """
-        Returns the shortest path from node id1 to node id2 using Dijkstra's Algorithm
-        @param id1: The start node id
-        @param id2: The end node id
-        @return: The distance of the path, a list of the nodes ids that the path goes through"""
-        """initialize all weights of nodes to infinity"""
-        dist_weight = {node: inf for node in self.graph.nodes.keys()}
-        """keeping track on the shortest path to the nodes"""
-        previous_nodes = {id1: -1}
-        dist_weight[id1] = 0
-        queue = []
-        heapq.heappush(queue, (0, id1))
-        while queue:
-            current_node = heapq.heappop(queue)[1]
-            if dist_weight[current_node] == inf:
-                break
-            """iterating on the neighbors of the current node as pairs (neighbor = id , weight = weight)"""
-            for neighbour, weight in self.graph.nodes.get(current_node).neighbors_out.items():
-                alternative_route = dist_weight[current_node] + weight
-                if alternative_route < dist_weight[neighbour]:
-                    dist_weight[neighbour] = alternative_route
-                    previous_nodes[neighbour] = current_node
-                    """adding to the queue the distance to the neighbor and the neighbor as a pair
-                    the queue is a priority queue so when it will pop an node, it will pop the node
-                     with the smallest dist_weight"""
-                    heapq.heappush(queue, (dist_weight[neighbour], neighbour))
-                if current_node == id2:
-                    break
-        path = []
-        current_node = id2
-        if dist_weight[id2] == inf:
-            """there isn't a path from id1 to id2"""
-            return inf, []
-        while current_node != -1:
-            path.insert(0, current_node)
-            """shortest path"""
-            current_node = previous_nodes[current_node]
-
-        return dist_weight[id2], path
-
-
-
 
     def TSP(self, node_lst: List[int]) -> (List[int], float):
         """

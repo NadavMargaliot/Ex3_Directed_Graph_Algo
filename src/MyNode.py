@@ -1,4 +1,4 @@
-
+import random
 
 
 class MyNode:
@@ -9,7 +9,7 @@ class MyNode:
         if location is not None:
             self.location = location
         else:
-            self.location = (0, 0, 0)
+            self.location = (random.uniform(0,100), random.uniform(0,100), 0)
         self.neighbors_out = {}  # <dest_id , weight>
         self.neighbors_in = {}  # <src_id , weight>
 
