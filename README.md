@@ -16,7 +16,7 @@ Representing a graph with those methods:
 #### add_node - adding a node to the graph.
 #### remove_node - removing a node from the graph.
 #### remove_edge - removing an edge between two nodes.
-### DWGraphAlgorithms:
+### GraphAlgo:
 Representing all the algorithms that will run on the graph with those methods:
 #### get_graph - returns the directed graph on which the algorithm works on.
 #### load_from_json - loading a json file in to a graph object.
