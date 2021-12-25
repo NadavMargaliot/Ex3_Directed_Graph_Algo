@@ -1,21 +1,19 @@
 import heapq
 import json
 import random
+import sys
+from itertools import permutations
 from typing import List
 from numpy import inf
-
 from GraphAlgoInterface import GraphAlgoInterface
 from DiGraph import DiGraph
 from src.GraphInterface import GraphInterface
 import matplotlib.pyplot as plt
-from src.MyNode import MyNode
 
 
 class GraphAlgo(GraphAlgoInterface):
     def __init__(self, graph: DiGraph = None):
         self.graph = graph
-
-
 
     def get_graph(self) -> GraphInterface:
         """
@@ -42,12 +40,12 @@ class GraphAlgo(GraphAlgoInterface):
                     pos_list = pos_node.split(',')
                     id_node = node.get('id')
                     self.graph.add_node(node_id=id_node, pos=(float(pos_list[0]), float(pos_list[1]),
-                                                                        float(pos_list[2])))
+                                                              float(pos_list[2])))
                 else:
-                    x = random.uniform(0 , 100)
-                    y = random.uniform(0 , 100)
-                    id_node =int(node.get('id'))
-                    self.graph.add_node(id_node,(x,y,0))
+                    x = random.uniform(0, 100)
+                    y = random.uniform(0, 100)
+                    id_node = int(node.get('id'))
+                    self.graph.add_node(id_node, (x, y, 0))
 
             for edge in edges_dict:
                 weight = edge.get('w')
@@ -128,8 +126,37 @@ class GraphAlgo(GraphAlgoInterface):
 
         return dist_weight[id2], path
 
+    def tsp_helper(self, start_node, node_list):
+        best_path = []
+        path = []
+        temp_list = []
+        for node_i in node_list:
+            if node_i != start_node:
+                temp_list.append(node_i)
+        min_weight = sys.maxsize
+        permu = permutations(temp_list)
 
-
+        for curr_permutation in permu:
+            path.clear()
+            relevant = True
+            curr_weight = 0
+            k = start_node
+            path.append(k)
+            for node_j in curr_permutation:
+                weight = self.shortest_path(k, node_j)[0]
+                for n in range(len(self.shortest_path(k, node_j)[1])):
+                    if n != 0:
+                        path.append(self.shortest_path(k, node_j)[1][n])
+                if weight == float('inf'):
+                    relevant = False
+                    break
+                curr_weight += weight
+                k = node_j
+            if relevant:
+                if min_weight > curr_weight:
+                    min_weight = curr_weight
+                    best_path = path
+        return best_path, min_weight
 
     def TSP(self, node_lst: List[int]) -> (List[int], float):
         """
@@ -137,6 +164,14 @@ class GraphAlgo(GraphAlgoInterface):
         :param node_lst: A list of nodes id's
         :return: A list of the nodes id's in the path, and the overall distance
         """
+        best_weight = sys.maxsize
+        for starting_n in node_lst:
+            if self.tsp_helper(starting_n, node_lst)[1] < best_weight:
+                best_weight = self.tsp_helper(starting_n, node_lst)[1]
+                best_path, weight = self.tsp_helper(starting_n, node_lst)
+        if best_weight == sys.maxsize:
+            return [], float('inf')
+        return best_path, weight
 
     def centerPoint(self) -> (int, float):
         """
@@ -144,7 +179,7 @@ class GraphAlgo(GraphAlgoInterface):
         :return: The nodes id, min-maximum distance
         """
         if self.graph.nodeSize == 0:
-            return None,None
+            return None, None
         result_min_distance = inf
         result_id = 0
         curr_max = 0
@@ -160,7 +195,6 @@ class GraphAlgo(GraphAlgoInterface):
         result = (result_id, result_min_distance)
         return result
 
-
     def plot_graph(self) -> None:
         """
         Plots the graph.
@@ -170,7 +204,7 @@ class GraphAlgo(GraphAlgoInterface):
         """
         for node in self.graph.nodes.values():
             if node.location is None:
-                location1 = (random.uniform(0,100) , random.uniform(0,100),0.0)
+                location1 = (random.uniform(0, 100), random.uniform(0, 100), 0.0)
                 node.setLocation(location1)
             x1, y1, z1 = node.location
             plt.plot(x1, y1, markersize=15, marker='.', color='orange')
@@ -183,4 +217,3 @@ class GraphAlgo(GraphAlgoInterface):
                 x2, y2, z2 = dest.location
                 plt.annotate("", xy=(x1, y1), xytext=(x2, y2), arrowprops=dict(arrowstyle="<|-"))
         plt.show()
-

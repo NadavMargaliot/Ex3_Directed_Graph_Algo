@@ -86,6 +86,19 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual((6, [1, 3, 5, 2]), alg.shortest_path(a.id, b.id))
         # print(alg.shortest_path(a.id,b.id))
 
+    def test_TSP(self):
+        alg1 = GraphAlgo()
+        A0 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A0.json"
+        A1 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A1.json"
+        A2 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A2.json"
+        A3 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A3.json"
+        A4 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A4.json"
+        A5 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A5.json"
+        T0 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/T0.json"
+        alg1.load_from_json(A5)
+        alg1.TSP([1,4,6,8])
+
+
     def test_centerPoint(self):
         alg1 = GraphAlgo()
         A0 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A0.json"
