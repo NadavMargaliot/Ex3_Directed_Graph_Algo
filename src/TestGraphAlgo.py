@@ -88,15 +88,13 @@ class MyTestCase(unittest.TestCase):
 
     def test_TSP(self):
         alg1 = GraphAlgo()
-        A0 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A0.json"
         A1 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A1.json"
         A2 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A2.json"
-        A3 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A3.json"
-        A4 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A4.json"
         A5 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A5.json"
-        T0 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/T0.json"
+        A7 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A7_1000.json"
+        A8 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A8_10000.json"
         alg1.load_from_json(A5)
-        alg1.TSP([1,4,6,8])
+        alg1.TSP([1,4,6,8,16])
 
 
     def test_centerPoint(self):
@@ -132,7 +130,7 @@ class MyTestCase(unittest.TestCase):
         A4 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A4.json"
         A5 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/A5.json"
         T0 = "/Users/adielbenmeir/PycharmProjects/Ex3_Directed_Graph_Algo/data/T0.json"
-        alg1.load_from_json(A5)
+        alg1.load_from_json(T0)
         alg1.plot_graph()
 
         graph = DiGraph()
