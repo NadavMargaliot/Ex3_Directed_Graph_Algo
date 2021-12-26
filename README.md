@@ -37,9 +37,11 @@ Graph G3:
 
 ### 
 Running the program:
-Clone the project from the front page.
-Choose a graph from the data file that you want to run algorithms on.
-Run the Main.
+1) Clone the project from the front page.
+
+2) Choose a graph from the data file that you want to run algorithms on.
+
+3) Run the Main.
 
 
 
