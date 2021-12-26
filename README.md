@@ -35,5 +35,11 @@ Graph G3:
 
 ![G3](https://user-images.githubusercontent.com/84914845/147069282-aff75a7b-4cd0-4820-ba4a-0dd1a69d63c9.jpg)
 
+### 
+Running the program:
+Clone the project from the front page.
+Choose a graph from the data file that you want to run algorithms on.
+Run the Main.
+
 
 
