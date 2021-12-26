@@ -1,4 +1,8 @@
 # Ex3_Directed_Graph_Algo
+
+![pythonimg](https://user-images.githubusercontent.com/84914845/147407782-95a92cd1-8b73-41f6-9b2f-c06c0d76064e.png)
+
+
 This project is about directed weighted graphs and algorithms, but this time on Python.
 The main task of this project is to run algorithms on a graph and visual it with Matplotlib.
 ## The classes in this project:
