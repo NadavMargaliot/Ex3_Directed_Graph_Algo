@@ -30,6 +30,12 @@ Representing all the algorithms that will run on the graph with those methods:
 #### centerPoint - finds the node that has the shortest distance to it's farthest node.
 #### plot_graph - plots the graph.
 
+### UML
+
+![uml_Ex3](https://user-images.githubusercontent.com/84914845/147492006-6497d31b-677e-4889-88b0-6e0948185ed0.jpeg)
+
+#### plot_graph - plots the graph.
+
 Example of the graph from check0() - random location of 4 nodes:
 ![random](https://user-images.githubusercontent.com/84914845/147069210-1aad4540-1b8e-422d-9b7a-e1b99798a0c4.jpg)
 
