@@ -32,7 +32,9 @@ Representing all the algorithms that will run on the graph with those methods:
 
 ### UML
 
-![uml_Ex3](https://user-images.githubusercontent.com/84914845/147492006-6497d31b-677e-4889-88b0-6e0948185ed0.jpeg)
+![umlEx3](https://user-images.githubusercontent.com/84914845/147492073-20cf5c30-9864-42e7-a61c-d4a903c5de06.jpeg)
+
+
 
 #### plot_graph - plots the graph.
 
