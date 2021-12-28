@@ -20,7 +20,7 @@ class MyNode:
 
     def __repr__(self) -> str:
         """@return a string (repr) representation of the NodeData"""
-        return f"{self.id}"
+        return f"{self.id}: |edges out| {len(self.neighbors_out)} |edges in| {len(self.neighbors_in)}"
 
 
     def setLocation(self, location: tuple):
